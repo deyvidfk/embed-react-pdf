@@ -1,0 +1,4 @@
+
+> embed-react-pdf@0.1.0 test
+> react-scripts test --testLocationInResults --json --useStderr --outputFile C:\Users\deyvi\AppData\Local\Temp\jest_runner_embed_react_pdf_deyvi_2.json --testNamePattern usePageList- --no-coverage --reporters default --reporters c:\Users\deyvi\.vscode\extensions\orta.vscode-jest-5.2.3\out\reporter.js --colors --watchAll=false --testPathPattern d:\\Luizalabs\\pdf-reader\\embed-react-pdf\\src\\lib\\Pages\\__test__\\usePageList\.spec\.tsx
+

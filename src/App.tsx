@@ -1,26 +1,73 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { pdfjs } from "react-pdf";
+import "./App.css";
+import { EmbedPdf } from "./lib";
+import { FC } from "react";
+import  "./App.css"
 
-function App() {
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
+
+function Loading() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="box">
+      Carregando ...
     </div>
   );
 }
 
-export default App;
+function MeuBotao({ children, ...rest }: any) {
+  return (
+    <button className="box" {...rest}>
+      {children}
+    </button>
+  );
+}
+
+export default function App() {
+
+  const onHandle = ({ name, meta }: any) => {
+    console.log(name, meta)
+  }
+
+  const handleOnPageChange = ({ page, count }: any) => {
+    console.log("App->handleOnPageChange: ", page, count)
+  }
+
+  const handleOnRotateChange = ({ degree }: any) => {
+    console.log("App->handleOnRotateChange: ", degree)
+  }
+
+  const handleOnScaleChange = ({ scale }: any) => {
+    console.log("App->handleOnScaleChange: ", scale)
+  }
+
+  return (
+    <EmbedPdf.Document src="test.pdf" eventListener={onHandle} LoadingRenderer={Loading}>
+      <EmbedPdf.Toolbar as={"fieldset"}>
+        <EmbedPdf.ToolbarItem>
+          <EmbedPdf.FullScreen containerId="PageList__id" >FullScreen</EmbedPdf.FullScreen>
+        </EmbedPdf.ToolbarItem>
+        <EmbedPdf.ToolbarItem>
+          <EmbedPdf.Print src="test.pdf">Imprimir</EmbedPdf.Print >
+        </EmbedPdf.ToolbarItem>
+        <EmbedPdf.ToolbarItem>
+          <EmbedPdf.Download src="test.pdf">Download</EmbedPdf.Download>
+        </EmbedPdf.ToolbarItem>
+        <EmbedPdf.ToolbarItem>
+          <EmbedPdf.Scale
+            onChange={handleOnScaleChange}
+            label="Zoom: " />
+        </EmbedPdf.ToolbarItem>
+        <EmbedPdf.ToolbarItem>
+          <EmbedPdf.Rotate onChange={handleOnRotateChange} label={"Girar: "} />
+        </EmbedPdf.ToolbarItem>
+        <EmbedPdf.ToolbarItem>
+          <EmbedPdf.Pagination onChange={handleOnPageChange} />
+          <EmbedPdf.PaginationInput slots={{ labelLeft: "Página", labelRight: "de" }} onChange={handleOnPageChange} />
+        </EmbedPdf.ToolbarItem>
+      </EmbedPdf.Toolbar>
+      <EmbedPdf.PageList id="PageList__id" />
+    </EmbedPdf.Document>
+  );
+}
+
+

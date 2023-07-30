@@ -1,0 +1,13 @@
+<svg width="60" height="60" viewBox="0 0 76 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="38" cy="38" r="30" stroke="url(#ipdvLoading)" stroke-width="6"/>
+  <defs>
+    <linearGradient id="ipdvLoading" x1="9" y1="38.9928" x2="69" y2="38.9928" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FBE53B"/>
+      <stop offset="0.17" stop-color="#FF4F01"/>
+      <stop offset="0.35" stop-color="#FF14B3"/>
+      <stop offset="0.55" stop-color="#8000FF"/>
+      <stop offset="0.8" stop-color="#00C1FF"/>
+      <stop offset="1" stop-color="#17F036"/>
+    </linearGradient>
+  </defs>
+</svg>
