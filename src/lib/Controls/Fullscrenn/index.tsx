@@ -4,7 +4,7 @@ import React, {
   FC,
   ReactElement,
   ReactNode,
-} from "react";
+} from 'react';
 
 export type TFullScreenControl = {
   containerId?: string;
@@ -13,9 +13,9 @@ export type TFullScreenControl = {
 
 export const useFullScreenControl = () => {
   function toggleFullscreen(containerId?: string) {
-    var elem = containerId ? document.getElementById(containerId) : document;
+    const elem = containerId ? document.getElementById(containerId) : document;
 
-    if (elem && "requestFullscreen" in elem) {
+    if (elem && 'requestFullscreen' in elem) {
       elem.requestFullscreen();
     }
   }
@@ -30,7 +30,7 @@ const FullScreenControl: FC<TFullScreenControl> = ({
 }) => {
   const { toggleFullscreen } = useFullScreenControl();
 
-  const extraButtonProps = asProp == "button" ? { type: "button" } : {};
+  const extraButtonProps = asProp == 'button' ? { type: 'button' } : {};
 
   const defaultButtonProps = {
     ...restProps,
@@ -44,7 +44,7 @@ const FullScreenControl: FC<TFullScreenControl> = ({
 };
 
 FullScreenControl.defaultProps = {
-  as: "button",
+  as: 'button',
 };
 
 export { FullScreenControl };

@@ -1,7 +1,7 @@
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, fireEvent, screen } from '@testing-library/react';
 
-import { DownloadControl } from "..";
-import "jest";
+import { DownloadControl } from '..';
+import 'jest';
 
 // it("should download the file", async () => {
 //   // renderizar o componente

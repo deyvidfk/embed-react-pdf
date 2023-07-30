@@ -1,24 +1,21 @@
-import React from "react";
-import { FC, useEffect, useRef } from "react";
+import React, { FC, useEffect, useRef } from 'react';
 
 const usePrinter = () => {
   const iframeRef = useRef<HTMLIFrameElement>();
 
-  useEffect(() => {
-    return () => {
-      if (iframeRef.current) {
-        document.body.removeChild(iframeRef.current);
-      }
-    };
+  useEffect(() => () => {
+    if (iframeRef.current) {
+      document.body.removeChild(iframeRef.current);
+    }
   });
 
   function delegateToPrinter(src: string) {
-    iframeRef.current = document.createElement("iframe");
-    iframeRef.current.className = "pdfIframe";
+    iframeRef.current = document.createElement('iframe');
+    iframeRef.current.className = 'pdfIframe';
     document.body.appendChild(iframeRef.current);
-    iframeRef.current.style.display = "none";
+    iframeRef.current.style.display = 'none';
     iframeRef.current.onload = function () {
-      setTimeout(function () {
+      setTimeout(() => {
         if (iframeRef.current) {
           iframeRef.current.focus();
 
@@ -48,7 +45,7 @@ const PrintControl: FC<TScaleControl> = ({
 }) => {
   const { delegateToPrinter } = usePrinter();
 
-  const extraButtonProps = asProp == "button" ? { type: "button" } : {};
+  const extraButtonProps = asProp == 'button' ? { type: 'button' } : {};
 
   const defaultButtonProps = {
     ...restProps,
@@ -62,7 +59,7 @@ const PrintControl: FC<TScaleControl> = ({
 };
 
 PrintControl.defaultProps = {
-  as: "button",
+  as: 'button',
 };
 
 export { PrintControl };

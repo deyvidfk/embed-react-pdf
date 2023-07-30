@@ -1,4 +1,4 @@
-import {
+import React, {
   ElementType,
   FC,
   LabelHTMLAttributes,
@@ -7,11 +7,10 @@ import {
   useEffect,
   useMemo,
   useState,
-} from "react";
-import { useControls } from "../useControls";
-import React from "react";
-import { useWindowWidth } from "@wojtekmaj/react-hooks";
-import { pdfjs, useDocumentContext } from "react-pdf";
+} from 'react';
+import { useWindowWidth } from '@wojtekmaj/react-hooks';
+import { pdfjs, useDocumentContext } from 'react-pdf';
+import { useControls } from '../useControls';
 
 type TRenderer = () => ReactNode;
 type TLabelProps = { value: string; props?: LabelHTMLAttributes<unknown> };
@@ -22,7 +21,7 @@ type TScaleControl = {
 };
 
 function isLabelProps(value: unknown): value is TLabelProps {
-  return Object.prototype.hasOwnProperty.call(value, "value");
+  return Object.prototype.hasOwnProperty.call(value, 'value');
 }
 
 const calcScaleFn = (pageWidth: number, windowWidth: number) => {
@@ -37,15 +36,13 @@ const usePageFit = (
   const { scale } = useControls();
 
   const fitToWidth = useCallback(
-    (pageIndex: number = 1) => {
+    (pageIndex = 1) => {
       if (documentInstance) {
         documentInstance
           .getPage(pageIndex)
-          .then((page: any) => {
-            return page.getViewport({ scale: scale.value });
-          })
+          .then((page: any) => page.getViewport({ scale: scale.value }))
           .then((page: pdfjs.PDFPageProxy) => {
-            if ("width" in page) {
+            if ('width' in page) {
               scale.set(calcScaleFn(Number(page.width), windowWidth ?? 0));
             }
           });
@@ -67,7 +64,7 @@ const ScaleControl: FC<TScaleControl> = ({ inputAs, onChange, label }) => {
   }, [scale]);
 
   const labelRendered = useMemo(() => {
-    if (typeof label == "string") {
+    if (typeof label === 'string') {
       return (
         <label className="mrc-embed-pdf__control-scale-label">{label}</label>
       );
@@ -82,13 +79,14 @@ const ScaleControl: FC<TScaleControl> = ({ inputAs, onChange, label }) => {
     return label;
   }, [label]);
 
-  const extraButtonProps =
-    inputAs == "input"
-      ? { type: "range", defaultValue: 1, min: 1, max: 3, step: 0.25 }
-      : {};
+  const extraButtonProps = inputAs == 'input'
+    ? {
+      type: 'range', defaultValue: 1, min: 1, max: 3, step: 0.25,
+    }
+    : {};
 
   const defaultButtonProps = {
-    className: "mrc-embed-pdf__control-input",
+    className: 'mrc-embed-pdf__control-input',
     onChange: (eve: any) => {
       scale.set(Number(eve.currentTarget.value));
     },
@@ -105,7 +103,7 @@ const ScaleControl: FC<TScaleControl> = ({ inputAs, onChange, label }) => {
 };
 
 ScaleControl.defaultProps = {
-  inputAs: "input",
+  inputAs: 'input',
 };
 
 export { ScaleControl };

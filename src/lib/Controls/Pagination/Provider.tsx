@@ -4,8 +4,8 @@ import {
   useState,
   useCallback,
   useMemo,
-} from "react";
-import { TPaginationContext } from "../../types";
+} from 'react';
+import { TPaginationContext } from '../../types';
 
 const PaginationContext = createContext<TPaginationContext | null>(null);
 
@@ -23,13 +23,11 @@ export const DocumentPaginationProvider: React.FC<
     setCurrentPage(value);
   }, []);
 
-  const va = useMemo(() => {
-    return {
-      toGo,
-      total,
-      page: currentPage,
-    };
-  }, []);
+  const va = useMemo(() => ({
+    toGo,
+    total,
+    page: currentPage,
+  }), []);
 
   return (
     <PaginationContext.Provider value={{ ...va }}>

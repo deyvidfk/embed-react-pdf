@@ -1,7 +1,7 @@
-import { memo } from "react";
-import { Page } from "react-pdf";
-import { areEqual } from "react-window";
-import { useControls } from "../Controls/useControls";
+import { memo } from 'react';
+import { Page } from 'react-pdf';
+import { areEqual } from 'react-window';
+import { useControls } from '../Controls/useControls';
 
 export const PageListItem = memo(({ index, style }: any) => {
   const { scale } = useControls();

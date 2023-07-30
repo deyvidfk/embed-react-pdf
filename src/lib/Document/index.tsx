@@ -1,7 +1,7 @@
-import { useState, useRef, PropsWithChildren } from "react";
-import { Document } from "react-pdf";
-import { PdfReaderProps } from "../types";
-import { ControlsConsumer, ControlsProvider } from "../Controls/Provider";
+import { useState, useRef, PropsWithChildren } from 'react';
+import { Document } from 'react-pdf';
+import { PdfReaderProps } from '../types';
+import { ControlsConsumer, ControlsProvider } from '../Controls/Provider';
 
 export function DocumentRoot({
   src,
@@ -10,9 +10,7 @@ export function DocumentRoot({
 }: PropsWithChildren<PdfReaderProps>) {
   const docRef = useRef();
   const [numPages, setNumPages] = useState(0);
-  const LoadingRenderer = LoadingRendererProp
-    ? LoadingRendererProp
-    : "Carregando...";
+  const LoadingRenderer = LoadingRendererProp || 'Carregando...';
   return (
     <ControlsProvider
       scale={1.2}
@@ -20,22 +18,20 @@ export function DocumentRoot({
       rotate={0}
     >
       <ControlsConsumer>
-        {(props) => {
-          return (
-            <Document
-              className={"mrc-embed-pdf__root"}
-              rotate={props?.rotate.value ?? 0}
-              onLoadSuccess={({ numPages }) => {
-                setNumPages(numPages);
-              }}
-              ref={docRef}
-              file={src}
-              loading={<>{LoadingRenderer}</>}
-            >
-              {children}
-            </Document>
-          );
-        }}
+        {(props) => (
+          <Document
+            className="mrc-embed-pdf__root"
+            rotate={props?.rotate.value ?? 0}
+            onLoadSuccess={({ numPages }) => {
+              setNumPages(numPages);
+            }}
+            ref={docRef}
+            file={src}
+            loading={<>{LoadingRenderer}</>}
+          >
+            {children}
+          </Document>
+        )}
       </ControlsConsumer>
     </ControlsProvider>
   );
