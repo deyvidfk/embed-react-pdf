@@ -30,7 +30,6 @@
 //       })
 //    });
 
-
 //    test('Deve tentar obter a altura da pagina', async () => {
 
 //       const Wrapper: FC<PropsWithChildren<unknown>> = ({ children }) => {
@@ -50,6 +49,6 @@
 
 //       expect(result.current.getPageHeight(0)).toEqual(pageHeight+bottomPageMarginPx)
 //    });
-// });       
+// });
 
-export {}
+export {};

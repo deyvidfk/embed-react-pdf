@@ -2,6 +2,52 @@
   "name": "embed-react-pdf",
   "version": "0.1.0",
   "private": true,
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "airbnb",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.ts?(x)"
+        ],
+        "rules": {
+          "react/jsx-filename-extension": [
+            1,
+            {
+              "extensions": [
+                ".tsx"
+              ]
+            }
+          ],
+          "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+              "ts": "never",
+              "tsx": "never"
+            }
+          ]
+        }
+      }
+    ],
+    "settings": {
+      "import/parsers": {
+        "@typescript-eslint/parser": [
+          ".ts",
+          ".tsx"
+        ]
+      },
+      "import/resolver": {
+        "typescript": {
+          "alwaysTryTypes": true
+        }
+      }
+    }
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^12",
@@ -24,13 +70,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "eject": "react-scripts eject",
+    "format": "prettier . --write",
+    "lint": "eslint . --ext .ts,.tsx"
   },
   "browserslist": {
     "production": [
@@ -47,7 +89,11 @@
   "devDependencies": {
     "@types/react-window": "^1.8.5",
     "babel-jest": "^29.6.1",
+    "eslint": "^8.46.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-import-resolver-typescript": "^3.5.5",
     "pdf2json": "^3.0.4",
-    "pdfjs-dist": "^3.8.162"
+    "pdfjs-dist": "^3.8.162",
+    "prettier": "^3.0.0"
   }
 }
