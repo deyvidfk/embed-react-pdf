@@ -11,7 +11,7 @@ const DownloadControl: FC<TDownloadControl> = ({
   as: asProp,
   ...restProps
 }) => {
-  const extraButtonProps = asProp == 'a' ? { targe: '_blank', download: true } : {};
+  const extraButtonProps = asProp == 'a' ? { href: src, targe: '_blank', download: true } : {};
 
   const defaultButtonProps = {
     ...restProps,

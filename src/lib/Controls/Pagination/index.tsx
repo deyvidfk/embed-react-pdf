@@ -1,8 +1,8 @@
 import React, {
   FC, ReactNode, useEffect, useRef,
 } from 'react';
-import { usePagination } from './usePagination';
 import { useControls } from '../useControls';
+import { usePagination } from '../../utils/usePagination';
 
 type TPaginationControl = {
   onChange?: ({ page, count }: { page: number; count: number }) => void;

@@ -1,12 +1,12 @@
-type TControlContainer = {
+type TToolbar = {
   disabled?: boolean;
   as: React.ElementType;
 };
 
-export function ControlPanel({
+export function Toolbar({
   children,
   as: asProp,
-}: React.PropsWithChildren<TControlContainer>) {
+}: React.PropsWithChildren<TToolbar>) {
   const Component = asProp;
   return (
     <Component

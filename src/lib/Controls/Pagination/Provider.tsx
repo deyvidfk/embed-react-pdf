@@ -23,11 +23,14 @@ export const DocumentPaginationProvider: React.FC<
     setCurrentPage(value);
   }, []);
 
-  const va = useMemo(() => ({
-    toGo,
-    total,
-    page: currentPage,
-  }), []);
+  const va = useMemo(
+    () => ({
+      toGo,
+      total,
+      page: currentPage,
+    }),
+    [],
+  );
 
   return (
     <PaginationContext.Provider value={{ ...va }}>

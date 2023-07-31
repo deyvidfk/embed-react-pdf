@@ -1,6 +1,16 @@
 import { useEffect, useState } from 'react';
 
-export const usePagination = ({ pagesCount, page, onChangeValue }: any) => {
+type THookValue = {
+  pagesCount: number;
+  page?: number;
+  onChangeValue?: (value: number) => void;
+};
+
+export const usePagination = ({
+  pagesCount,
+  page = 1,
+  onChangeValue,
+}: THookValue) => {
   const [currentPage, setCurrentPage] = useState(page);
 
   useEffect(() => {
@@ -9,28 +19,36 @@ export const usePagination = ({ pagesCount, page, onChangeValue }: any) => {
 
   function previousPage() {
     setCurrentPage((v: number) => {
-      const ret = v - 1;
-      setTimeout(() => {
-        if (onChangeValue) onChangeValue(ret);
-      }, 0);
-      return ret;
+      if (v > 1) {
+        const ret = v - 1;
+        setTimeout(() => {
+          if (onChangeValue) onChangeValue(ret);
+        }, 0);
+        return ret;
+      }
+      return v;
     });
   }
 
   function nextPage() {
     setCurrentPage((v: number) => {
-      const ret = v + 1;
+      if (v < pagesCount) {
+        const ret = v + 1;
 
-      setTimeout(() => {
-        if (onChangeValue) onChangeValue(ret);
-      }, 0);
-      return ret;
+        setTimeout(() => {
+          if (onChangeValue) onChangeValue(ret);
+        }, 0);
+
+        return ret;
+      }
+
+      return v;
     });
   }
 
   function lastPage() {
     setCurrentPage((_v: number) => {
-      const ret = pagesCount - 1;
+      const ret = pagesCount;
 
       setTimeout(() => {
         if (onChangeValue) onChangeValue(ret);
@@ -41,7 +59,7 @@ export const usePagination = ({ pagesCount, page, onChangeValue }: any) => {
 
   function firstPage() {
     setCurrentPage((_v: number) => {
-      const ret = 0;
+      const ret = 1;
       setTimeout(() => {
         if (onChangeValue) onChangeValue(ret);
       }, 0);

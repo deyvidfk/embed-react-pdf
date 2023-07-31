@@ -23,48 +23,50 @@ jest.mock('react-pdf', () => ({
   }),
 }));
 
-it('Deve renderizar a lista de paginas', async () => {
-  const Wrapper: React.FC<PropsWithChildren<unknown>> = ({ children }) => (
-    <ControlsProvider
-      pagination={{ total: 2, page: 1 }}
-      rotate={90}
-      scale={1}
-    >
-      {children}
-    </ControlsProvider>
-  );
+describe('PageList', () => {
+  it('Deve renderizar a lista de paginas', async () => {
+    const Wrapper: React.FC<PropsWithChildren<unknown>> = ({ children }) => (
+      <ControlsProvider
+        pagination={{ total: 2, page: 1 }}
+        rotate={90}
+        scale={1}
+      >
+        {children}
+      </ControlsProvider>
+    );
 
-  render(<PageList id="page_list" />, { wrapper: Wrapper });
+    render(<PageList id="page_list" />, { wrapper: Wrapper });
 
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(0);
-    }, 100);
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(0);
+      }, 100);
+    });
+
+    expect(screen.getAllByText(/Pagina fake/)).toHaveLength(2);
   });
 
-  expect(screen.getAllByText(/Pagina fake/)).toHaveLength(2);
-});
+  it('Deve anexar o id', async () => {
+    const Wrapper: React.FC<PropsWithChildren<unknown>> = ({ children }) => (
+      <ControlsProvider
+        pagination={{ total: 2, page: 1 }}
+        rotate={90}
+        scale={1}
+      >
+        {children}
+      </ControlsProvider>
+    );
 
-it('Deve anexar o id', async () => {
-  const Wrapper: React.FC<PropsWithChildren<unknown>> = ({ children }) => (
-    <ControlsProvider
-      pagination={{ total: 2, page: 1 }}
-      rotate={90}
-      scale={1}
-    >
-      {children}
-    </ControlsProvider>
-  );
+    const id = 'page_list';
 
-  const id = 'page_list';
+    const { container } = render(<PageList id={id} />, { wrapper: Wrapper });
 
-  const { container } = render(<PageList id={id} />, { wrapper: Wrapper });
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(0);
+      }, 100);
+    });
 
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(0);
-    }, 100);
+    expect(container.querySelector(`#${id}`)).toBeInTheDocument();
   });
-
-  expect(container.querySelector(`#${id}`)).toBeInTheDocument();
 });

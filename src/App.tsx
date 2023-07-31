@@ -1,19 +1,18 @@
-import { pdfjs } from 'react-pdf';
 import './App.css';
 import { FC } from 'react';
 import { EmbedPdf } from './lib';
-
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
 
 function Loading() {
   return <div className="box">Carregando ...</div>;
 }
 
+const MeuErrorHandler: FC = (pros: any) => <div className="box">Houve um erro ao processar o pdf</div>;
+
 function MeuBotao({ children, ...rest }: any) {
   return (
-    <button className="box" {...rest}>
+    <div className="box" {...rest}>
       {children}
-    </button>
+    </div>
   );
 }
 
@@ -37,36 +36,49 @@ export default function App() {
   return (
     <EmbedPdf.Document
       src="test.pdf"
-      eventListener={onHandle}
-      LoadingRenderer={Loading}
+      onPdfAbstractEvents={onHandle}
+      slots={{
+        Error: MeuErrorHandler,
+        Loading,
+      }}
     >
-      <EmbedPdf.Toolbar as="fieldset">
-        <EmbedPdf.ToolbarItem>
-          <EmbedPdf.FullScreen containerId="PageList__id">
-            FullScreen
-          </EmbedPdf.FullScreen>
-        </EmbedPdf.ToolbarItem>
-        <EmbedPdf.ToolbarItem>
-          <EmbedPdf.Print src="test.pdf">Imprimir</EmbedPdf.Print>
-        </EmbedPdf.ToolbarItem>
-        <EmbedPdf.ToolbarItem>
-          <EmbedPdf.Download src="test.pdf">Download</EmbedPdf.Download>
-        </EmbedPdf.ToolbarItem>
-        <EmbedPdf.ToolbarItem>
-          <EmbedPdf.Scale onChange={handleOnScaleChange} label="Zoom: " />
-        </EmbedPdf.ToolbarItem>
-        <EmbedPdf.ToolbarItem>
-          <EmbedPdf.Rotate onChange={handleOnRotateChange} label="Girar: " />
-        </EmbedPdf.ToolbarItem>
-        <EmbedPdf.ToolbarItem>
-          <EmbedPdf.Pagination onChange={handleOnPageChange} />
-          <EmbedPdf.PaginationInput
-            slots={{ labelLeft: 'Página', labelRight: 'de' }}
-            onChange={handleOnPageChange}
-          />
-        </EmbedPdf.ToolbarItem>
-      </EmbedPdf.Toolbar>
-      <EmbedPdf.PageList id="PageList__id" />
+      <div style={{ display: 'flex', flex: '1', overflow: 'auto' }}>
+        <EmbedPdf.Toolbar as="fieldset">
+          <EmbedPdf.ToolbarItem>
+            <EmbedPdf.Download src="test.pdf">Download</EmbedPdf.Download>
+          </EmbedPdf.ToolbarItem>
+          <EmbedPdf.ToolbarItem>
+            <EmbedPdf.FullScreen containerId="#PageList__id">
+              FullScreen
+            </EmbedPdf.FullScreen>
+          </EmbedPdf.ToolbarItem>
+
+          <EmbedPdf.ToolbarItem>
+            <EmbedPdf.Print src="test.pdf">Imprimir</EmbedPdf.Print>
+          </EmbedPdf.ToolbarItem>
+          <EmbedPdf.ToolbarItem>
+            <EmbedPdf.AutoScale>Ajustar à largura</EmbedPdf.AutoScale>
+          </EmbedPdf.ToolbarItem>
+          <EmbedPdf.ToolbarItem>
+            <EmbedPdf.ManualScale
+              onChange={handleOnScaleChange}
+              label="Zoom: "
+            />
+          </EmbedPdf.ToolbarItem>
+
+          <EmbedPdf.ToolbarItem>
+            <EmbedPdf.Rotate onChange={handleOnRotateChange} label="Girar: " />
+          </EmbedPdf.ToolbarItem>
+          <EmbedPdf.ToolbarItem>
+            <EmbedPdf.Pagination onChange={handleOnPageChange} />
+            <EmbedPdf.PaginationInput
+              slots={{ labelLeft: 'Página', labelRight: 'de' }}
+              onChange={handleOnPageChange}
+            />
+          </EmbedPdf.ToolbarItem>
+        </EmbedPdf.Toolbar>
+      </div>
+      <EmbedPdf.PageList id="PageList__id" pageFit />
     </EmbedPdf.Document>
   );
 }

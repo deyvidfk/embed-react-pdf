@@ -8,21 +8,34 @@ import { usePageList } from './usePageList';
 import { useControls } from '../Controls/useControls';
 import { PageListItem } from './PageListItem';
 import { useCustomDebounce } from '../useCustomDebounce';
+import { usePageFit } from '../Controls/Scale';
 
 type TPageList = {
   id: string;
+  pageFit?: boolean;
 };
 
-export function PageList({ id }: TPageList) {
+export const bottomPageMarginPx = 1;
+
+export function PageList({ id, pageFit }: TPageList) {
   const documentContext = useDocumentContext();
+  const windowWidth = useWindowWidth();
+  const windowHeight = useWindowHeight();
   const { pagination, scale } = useControls();
-  const {
-    getPageHeight, windowHeight, windowWidth, pageViewPort,
-  } = usePageList(documentContext?.pdf);
+  const { getPageHeight, pages } = usePageList(documentContext?.pdf);
   const variableSizeListRef = useRef<VariableSizeList<unknown>>();
   const internalPage = useRef(pagination.page.value);
   const debounce = useCustomDebounce();
   const outerRef = useRef<HTMLElement>();
+
+  const dc = useDocumentContext();
+  const fitToWidth = usePageFit(dc?.pdf);
+
+  useEffect(() => {
+    if (pageFit) {
+      fitToWidth.fitToWidth();
+    }
+  }, []);
 
   useEffect(() => {
     if (
@@ -50,7 +63,7 @@ export function PageList({ id }: TPageList) {
     variableSizeListRef.current?.resetAfterIndex(0);
   }, [estimatedItemSize]);
 
-  if (!documentContext?.pdf || !pageViewPort) {
+  if (!documentContext?.pdf || !pages) {
     return <>Carregando..</>;
   }
 
@@ -71,9 +84,9 @@ export function PageList({ id }: TPageList) {
       }}
       ref={variableSizeListRef as any}
       width={windowWidth as number}
-      height={windowHeight as number}
+      height={((windowHeight ?? 0) + bottomPageMarginPx) as number}
       estimatedItemSize={estimatedItemSize}
-      itemCount={documentContext?.linkService.pagesCount}
+      itemCount={documentContext?.pdf.numPages}
       itemSize={getPageHeight}
       overscanCount={3}
       direction="vertical"

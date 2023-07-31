@@ -2,7 +2,7 @@ import { render, waitFor, screen } from '@testing-library/react';
 import { PropsWithChildren } from 'react';
 import { ControlsProvider } from '../../Controls/Provider';
 
-describe('Name of the group', () => {
+describe('PageListItem', () => {
   it('Deve renderizar uma pagina', async () => {
     const PageMocked = jest.fn().mockImplementation(() => <>Pagina fake</>);
 

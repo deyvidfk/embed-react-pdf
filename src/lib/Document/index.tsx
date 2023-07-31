@@ -1,16 +1,35 @@
-import { useState, useRef, PropsWithChildren } from 'react';
-import { Document } from 'react-pdf';
+import {
+  useState, useRef, PropsWithChildren, useCallback,
+} from 'react';
+import { Document, pdfjs } from 'react-pdf';
 import { PdfReaderProps } from '../types';
 import { ControlsConsumer, ControlsProvider } from '../Controls/Provider';
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
 
 export function DocumentRoot({
   src,
   children,
-  LoadingRenderer: LoadingRendererProp,
+  onPdfAbstractEvents,
+  slots,
+  pdfLibRef: rootRef,
 }: PropsWithChildren<PdfReaderProps>) {
-  const docRef = useRef();
   const [numPages, setNumPages] = useState(0);
-  const LoadingRenderer = LoadingRendererProp || 'Carregando...';
+  const LoadingRenderer = slots?.Loading || 'Carregando...';
+  const ErrorRenderer = slots?.Error || 'Erro...';
+
+  const handleEvents = useCallback(
+    (name: any) => (value: any) => {
+      if (onPdfAbstractEvents) {
+        onPdfAbstractEvents({
+          name,
+          meta: value,
+        });
+      }
+    },
+    [onPdfAbstractEvents],
+  );
+
   return (
     <ControlsProvider
       scale={1.2}
@@ -20,12 +39,18 @@ export function DocumentRoot({
       <ControlsConsumer>
         {(props) => (
           <Document
+            error={ErrorRenderer}
+            onError={handleEvents('GENERIC_ERROR')}
+            onLoadError={handleEvents('LOAD_ERROR')}
+            onSourceError={handleEvents('SOURCE_ERROR')}
+            onLoadProgress={handleEvents('ONLOAD_PROGRESS')}
             className="mrc-embed-pdf__root"
             rotate={props?.rotate.value ?? 0}
-            onLoadSuccess={({ numPages }) => {
-              setNumPages(numPages);
+            onLoadSuccess={(value) => {
+              handleEvents('onLoadSuccess')(value);
+              setNumPages(value.numPages);
             }}
-            ref={docRef}
+            ref={rootRef}
             file={src}
             loading={<>{LoadingRenderer}</>}
           >

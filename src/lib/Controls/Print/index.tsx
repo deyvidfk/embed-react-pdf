@@ -1,37 +1,6 @@
 import React, { FC, useEffect, useRef } from 'react';
+import printJS from 'print-js';
 
-const usePrinter = () => {
-  const iframeRef = useRef<HTMLIFrameElement>();
-
-  useEffect(() => () => {
-    if (iframeRef.current) {
-      document.body.removeChild(iframeRef.current);
-    }
-  });
-
-  function delegateToPrinter(src: string) {
-    iframeRef.current = document.createElement('iframe');
-    iframeRef.current.className = 'pdfIframe';
-    document.body.appendChild(iframeRef.current);
-    iframeRef.current.style.display = 'none';
-    iframeRef.current.onload = function () {
-      setTimeout(() => {
-        if (iframeRef.current) {
-          iframeRef.current.focus();
-
-          if (iframeRef.current.contentWindow) {
-            iframeRef.current.contentWindow?.print();
-            URL.revokeObjectURL(src);
-          }
-        }
-      }, 1);
-    };
-    iframeRef.current.src = src;
-    // URL.revokeObjectURL(url)
-  }
-
-  return { delegateToPrinter };
-};
 type TScaleControl = {
   src: string;
   as?: React.ElementType;
@@ -43,15 +12,14 @@ const PrintControl: FC<TScaleControl> = ({
   children,
   ...restProps
 }) => {
-  const { delegateToPrinter } = usePrinter();
-
   const extraButtonProps = asProp == 'button' ? { type: 'button' } : {};
 
   const defaultButtonProps = {
     ...restProps,
     ...extraButtonProps,
     onClick: () => {
-      delegateToPrinter(src);
+      // printJS( { printable:  document.querySelector("#PageList__id")?.firstChild, type: 'html'})
+      printJS({ printable: src, type: 'pdf' });
     },
   };
 

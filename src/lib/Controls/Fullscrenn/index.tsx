@@ -1,25 +1,9 @@
-import React, {
-  ButtonHTMLAttributes,
-  ComponentType,
-  FC,
-  ReactElement,
-  ReactNode,
-} from 'react';
+import React, { FC } from 'react';
+import screenfull from 'screenfull';
 
 export type TFullScreenControl = {
   containerId?: string;
   as?: React.ElementType;
-};
-
-export const useFullScreenControl = () => {
-  function toggleFullscreen(containerId?: string) {
-    const elem = containerId ? document.getElementById(containerId) : document;
-
-    if (elem && 'requestFullscreen' in elem) {
-      elem.requestFullscreen();
-    }
-  }
-  return { toggleFullscreen };
 };
 
 const FullScreenControl: FC<TFullScreenControl> = ({
@@ -28,15 +12,19 @@ const FullScreenControl: FC<TFullScreenControl> = ({
   as: asProp,
   ...restProps
 }) => {
-  const { toggleFullscreen } = useFullScreenControl();
-
   const extraButtonProps = asProp == 'button' ? { type: 'button' } : {};
 
   const defaultButtonProps = {
     ...restProps,
     ...extraButtonProps,
     onClick: () => {
-      toggleFullscreen(containerId);
+      if (screenfull.isEnabled) {
+        let ele;
+        if (containerId) {
+          ele = document.querySelector(containerId);
+        }
+        screenfull.request(ele ?? undefined);
+      }
     },
   };
 

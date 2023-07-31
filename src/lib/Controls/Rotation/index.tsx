@@ -52,7 +52,11 @@ const RotateControl: FC<TRotateControl> = ({ inputAs, onChange, label }) => {
 
   const extraButtonProps = inputAs == 'input'
     ? {
-      type: 'range', defaultValue: 0, min: 0, max: 270, step: 90,
+      type: 'range',
+      defaultValue: 0,
+      min: 0,
+      max: 270,
+      step: 90,
     }
     : {};
 

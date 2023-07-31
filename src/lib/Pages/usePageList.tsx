@@ -1,16 +1,11 @@
 import { asyncMap } from '@wojtekmaj/async-array-utils';
-import { useWindowWidth, useWindowHeight } from '@wojtekmaj/react-hooks';
 import { useState, useEffect, useCallback } from 'react';
 import { pdfjs } from 'react-pdf';
 import { useControls } from '../Controls/useControls';
 
-export const bottomPageMarginPx = 1;
-
 export const usePageList = (
   documentInstance: false | pdfjs.PDFDocumentProxy | undefined,
 ) => {
-  const windowWidth = useWindowWidth();
-  const windowHeight = useWindowHeight();
   const [documentRef] = useState<false | pdfjs.PDFDocumentProxy | undefined>(
     documentInstance,
   );
@@ -49,15 +44,13 @@ export const usePageList = (
 
       const pageViewport = pageViewPort[pageIndex] as any;
 
-      return pageViewport.height + bottomPageMarginPx;
+      return pageViewport.height;
     },
     [pageViewPort, scale.value],
   );
 
   return {
     getPageHeight,
-    windowWidth,
-    windowHeight,
-    pageViewPort,
+    pages: pageViewPort,
   };
 };

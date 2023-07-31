@@ -1,25 +1,16 @@
 body {
   overflow: hidden;
+  padding: 0;
+  margin: 0;
+  background-color: #e6e6e6 !important;
 }
 
 .react-pdf__Page {
+  background-color: #e6e6e6 !important;
   text-align: -webkit-center;
 }
 
-.react-pdf__Page__canvas,
 .mc-pdf-page {
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-.mrc-embed-pdf__toolbar {
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-  /* height: 40px; */
-  border: 0;
-  align-items: center;
-  padding: 8px;
-  justify-content: center;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
@@ -27,17 +18,38 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* padding:"0 16px"; */
 }
-.mrc-embed-pdf__control-input {
-  height: 24px;
+
+.mrc-embed-pdf__page-list {
+  top: 52px;
 }
-.mrc-embed-pdf__toolbar-item button {
-  /* width: 40px;
-  height: 32px; */
-  /* background: aqua;
-  color: bisque; */
+
+.mrc-embed-pdf__toolbar {
+  border-radius: 8px;
+  top: 8px;
+  left: 8px;
+  display: flex;
+  /* needs vendor prefixes */
+  flex-direction: row;
+  border: 0;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  /* width: 70%; */
+  z-index: 4;
+  gap: 16px;
+  padding: 0 8px;
+  box-sizing: border-box;
+  height: 38px;
+  box-shadow:
+    0px 4.8px 10.8px rgba(0, 0, 0, 0.13),
+    0px 0px 4.7px rgba(0, 0, 0, 0.11);
+  background: Background;
 }
-.react-pdf__Page .mrc-embed-pdf__page-list-item {
-  background-color: #e6e6e6 !important;
+
+@media (-ms-high-contrast: active) {
+  .mrc-embed-pdf__toolbar {
+    border: 1px solid WindowText;
+    background: Background;
+  }
 }
