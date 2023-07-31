@@ -1,14 +1,12 @@
-import {
-  useCallback, useEffect, useMemo, useRef, useState,
-} from 'react';
-import { pdfjs, useDocumentContext } from 'react-pdf';
-import { VariableSizeList } from 'react-window';
-import { useWindowHeight, useWindowWidth } from '@wojtekmaj/react-hooks';
-import { usePageList } from './usePageList';
-import { useControls } from '../Controls/useControls';
-import { PageListItem } from './PageListItem';
-import { useCustomDebounce } from '../useCustomDebounce';
-import { usePageFit } from '../Controls/Scale';
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { pdfjs, useDocumentContext } from "react-pdf";
+import { VariableSizeList } from "react-window";
+import { useWindowHeight, useWindowWidth } from "@wojtekmaj/react-hooks";
+import { usePageList } from "./usePageList";
+import { useControls } from "../Controls/useControls";
+import { PageListItem } from "./PageListItem";
+import { useCustomDebounce } from "../useCustomDebounce";
+import { usePageFit } from "../Controls/Scale";
 
 type TPageList = {
   id: string;
@@ -39,13 +37,13 @@ export function PageList({ id, pageFit }: TPageList) {
 
   useEffect(() => {
     if (
-      variableSizeListRef.current
-      && pagination.page.value != internalPage.current
+      variableSizeListRef.current &&
+      pagination.page.value !== internalPage.current
     ) {
       if (variableSizeListRef.current) {
         variableSizeListRef.current?.scrollToItem(
           pagination.page.value,
-          'start',
+          "start",
         );
       }
     }
@@ -79,7 +77,7 @@ export function PageList({ id, pageFit }: TPageList) {
         }, 200);
 
         if (outerRef.current) {
-          (outerRef.current as HTMLElement).setAttribute('id', id);
+          (outerRef.current as HTMLElement).setAttribute("id", id);
         }
       }}
       ref={variableSizeListRef as any}

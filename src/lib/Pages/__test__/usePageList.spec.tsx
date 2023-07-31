@@ -1,11 +1,13 @@
-import { renderHook } from '@testing-library/react-hooks';
-import { FC, PropsWithChildren } from 'react';
-import { usePageList } from '../usePageList';
-import { ControlsProvider } from '../../Controls/Provider';
+import { renderHook } from "@testing-library/react-hooks";
+import { FC, PropsWithChildren } from "react";
+import { usePageList } from "../usePageList";
+import { ControlsProvider } from "../../Controls/Provider";
 
-describe('usePageList', () => {
-  test('Deve criar uma instancia valida do hook', async () => {
-    const Wrapper: FC<PropsWithChildren<unknown>> = ({ children }) => <ControlsProvider>{children}</ControlsProvider>;
+describe("usePageList", () => {
+  test("Deve criar uma instancia valida do hook", async () => {
+    const Wrapper: FC<PropsWithChildren<unknown>> = ({ children }) => (
+      <ControlsProvider>{children}</ControlsProvider>
+    );
     const pageListArg = {
       numPages: 1,
       getPage: jest.fn().mockResolvedValue({
@@ -31,8 +33,10 @@ describe('usePageList', () => {
     );
   });
 
-  test('Deve tentar obter a altura da pagina', async () => {
-    const Wrapper: FC<PropsWithChildren<unknown>> = ({ children }) => <ControlsProvider>{children}</ControlsProvider>;
+  test("Deve tentar obter a altura da pagina", async () => {
+    const Wrapper: FC<PropsWithChildren<unknown>> = ({ children }) => (
+      <ControlsProvider>{children}</ControlsProvider>
+    );
     const pageHeight = 10;
     const pageListArg = {
       numPages: 1,

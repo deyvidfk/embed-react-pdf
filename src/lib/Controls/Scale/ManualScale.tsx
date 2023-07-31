@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useMemo } from 'react';
-import { useControls } from '../useControls';
-import { TScaleControl } from './types';
-import { isLabelProps } from './utils';
+import React, { FC, useEffect, useMemo } from "react";
+import { useControls } from "../useControls";
+import { TScaleControl } from "./types";
+import { isLabelProps } from "./utils";
 
 const ManualScale: FC<TScaleControl> = ({ inputAs, onChange, label }) => {
   const { scale } = useControls();
@@ -11,7 +11,7 @@ const ManualScale: FC<TScaleControl> = ({ inputAs, onChange, label }) => {
   }, [scale]);
 
   const labelRendered = useMemo(() => {
-    if (typeof label === 'string') {
+    if (typeof label === "string") {
       return (
         <label className="mrc-embed-pdf__control-scale-label">{label}</label>
       );
@@ -26,18 +26,19 @@ const ManualScale: FC<TScaleControl> = ({ inputAs, onChange, label }) => {
     return label;
   }, [label]);
 
-  const extraButtonProps = inputAs == 'input'
-    ? {
-      type: 'range',
-      defaultValue: 1,
-      min: 1,
-      max: 3,
-      step: 0.25,
-    }
-    : {};
+  const extraButtonProps =
+    inputAs === "input"
+      ? {
+          type: "range",
+          defaultValue: 1,
+          min: 1,
+          max: 3,
+          step: 0.25,
+        }
+      : {};
 
   const defaultButtonProps = {
-    className: 'mrc-embed-pdf__control-input',
+    className: "mrc-embed-pdf__control-input",
     onChange: (eve: any) => {
       scale.set(Number(eve.currentTarget.value));
     },
@@ -53,7 +54,7 @@ const ManualScale: FC<TScaleControl> = ({ inputAs, onChange, label }) => {
 };
 
 ManualScale.defaultProps = {
-  inputAs: 'input',
+  inputAs: "input",
 };
 
 export { ManualScale };

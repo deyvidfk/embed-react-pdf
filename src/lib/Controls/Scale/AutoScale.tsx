@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
-import { useDocumentContext } from 'react-pdf';
-import { usePageFit } from '../../utils/usePageFit';
+import React, { FC } from "react";
+import { useDocumentContext } from "react-pdf";
+import { usePageFit } from "../../utils/usePageFit";
 
 const AutoScale: FC<{ as?: React.ElementType }> = ({
   children,
@@ -10,7 +10,7 @@ const AutoScale: FC<{ as?: React.ElementType }> = ({
   const dc = useDocumentContext();
   const fitToWidth = usePageFit(dc?.pdf);
 
-  const extraButtonProps = asProp == 'button' ? { type: 'button' } : {};
+  const extraButtonProps = asProp == "button" ? { type: "button" } : {};
 
   const defaultButtonProps = {
     ...restProps,
@@ -22,7 +22,7 @@ const AutoScale: FC<{ as?: React.ElementType }> = ({
 };
 
 AutoScale.defaultProps = {
-  as: 'button',
+  as: "button",
 };
 
 export { AutoScale };

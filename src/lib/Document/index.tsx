@@ -1,9 +1,7 @@
-import {
-  useState, useRef, PropsWithChildren, useCallback,
-} from 'react';
-import { Document, pdfjs } from 'react-pdf';
-import { PdfReaderProps } from '../types';
-import { ControlsConsumer, ControlsProvider } from '../Controls/Provider';
+import { useState, useRef, PropsWithChildren, useCallback } from "react";
+import { Document, pdfjs } from "react-pdf";
+import { PdfReaderProps } from "../types";
+import { ControlsConsumer, ControlsProvider } from "../Controls/Provider";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/legacy/build/pdf.worker.min.js`;
 
@@ -15,8 +13,8 @@ export function DocumentRoot({
   pdfLibRef: rootRef,
 }: PropsWithChildren<PdfReaderProps>) {
   const [numPages, setNumPages] = useState(0);
-  const LoadingRenderer = slots?.Loading || 'Carregando...';
-  const ErrorRenderer = slots?.Error || 'Erro...';
+  const LoadingRenderer = slots?.Loading || "Carregando...";
+  const ErrorRenderer = slots?.Error || "Erro...";
 
   const handleEvents = useCallback(
     (name: any) => (value: any) => {
@@ -40,14 +38,14 @@ export function DocumentRoot({
         {(props) => (
           <Document
             error={ErrorRenderer}
-            onError={handleEvents('GENERIC_ERROR')}
-            onLoadError={handleEvents('LOAD_ERROR')}
-            onSourceError={handleEvents('SOURCE_ERROR')}
-            onLoadProgress={handleEvents('ONLOAD_PROGRESS')}
+            onError={handleEvents("GENERIC_ERROR")}
+            onLoadError={handleEvents("LOAD_ERROR")}
+            onSourceError={handleEvents("SOURCE_ERROR")}
+            onLoadProgress={handleEvents("ONLOAD_PROGRESS")}
             className="mrc-embed-pdf__root"
             rotate={props?.rotate.value ?? 0}
             onLoadSuccess={(value) => {
-              handleEvents('onLoadSuccess')(value);
+              handleEvents("onLoadSuccess")(value);
               setNumPages(value.numPages);
             }}
             ref={rootRef}

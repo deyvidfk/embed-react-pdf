@@ -1,15 +1,15 @@
-import { act, renderHook } from '@testing-library/react-hooks';
-import { PropsWithChildren } from 'react';
-import { usePageFit } from '..';
-import { ControlsProvider } from '../../../Controls/Provider';
+import { act, renderHook } from "@testing-library/react-hooks";
+import { PropsWithChildren } from "react";
+import { usePageFit } from "..";
+import { ControlsProvider } from "../../../Controls/Provider";
 
-jest.mock('@wojtekmaj/react-hooks', () => ({
+jest.mock("@wojtekmaj/react-hooks", () => ({
   __esModule: true,
   useWindowWidth: () => 1024,
 }));
 
-describe('usePageFit', () => {
-  test('Deve ajustar a escala para ocultar toda a tela', async () => {
+describe("usePageFit", () => {
+  test("Deve ajustar a escala para ocultar toda a tela", async () => {
     function Wrapper({ children }: PropsWithChildren<unknown>) {
       return <ControlsProvider scale={1}>{children}</ControlsProvider>;
     }

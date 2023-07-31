@@ -1,16 +1,12 @@
-import React, {
-  FC, ReactNode, useEffect, useRef,
-} from 'react';
-import { useControls } from '../useControls';
-import { usePagination } from '../../utils/usePagination';
+import React, { FC, ReactNode, useEffect, useRef } from "react";
+import { useControls } from "../useControls";
+import { usePagination } from "../../utils/usePagination";
 
 type TPaginationControl = {
   onChange?: ({ page, count }: { page: number; count: number }) => void;
   disabled?: boolean;
 };
 function PaginationControl({ onChange }: TPaginationControl) {
-  const inputRef = useRef();
-
   const { pagination } = useControls();
 
   const {
@@ -29,7 +25,8 @@ function PaginationControl({ onChange }: TPaginationControl) {
   useEffect(() => {
     setCurrentPage(pagination.page.value);
 
-    if (onChange) onChange({ page: pagination.page.value, count: pagination.total.value });
+    if (onChange)
+      onChange({ page: pagination.page.value, count: pagination.total.value });
   }, [pagination.page.value]);
 
   useEffect(() => {
@@ -37,8 +34,8 @@ function PaginationControl({ onChange }: TPaginationControl) {
   }, [currentPage]);
 
   const handleKeyPress = (event: any) => {
-    console.log('Enter');
-    if (event.key == 'Enter') {
+    console.log("Enter");
+    if (event.key === "Enter") {
       const nv = Number(event.currentTarget.value);
       if (nv <= pagesCount) {
         setCurrentPage(nv);
@@ -68,11 +65,11 @@ function PaginationControl({ onChange }: TPaginationControl) {
   return (
     <>
       <button type="button" disabled={currentPage <= 1} onClick={firstPage}>
-        {'<<'}
+        {"<<"}
       </button>
 
       <button type="button" disabled={currentPage <= 1} onClick={previousPage}>
-        {'<'}
+        {"<"}
       </button>
 
       <button
@@ -80,7 +77,7 @@ function PaginationControl({ onChange }: TPaginationControl) {
         disabled={currentPage >= pagesCount}
         onClick={nextPage}
       >
-        {'>'}
+        {">"}
       </button>
 
       <button
@@ -88,7 +85,7 @@ function PaginationControl({ onChange }: TPaginationControl) {
         disabled={currentPage >= pagesCount}
         onClick={lastPage}
       >
-        {'>>'}
+        {">>"}
       </button>
     </>
   );
@@ -120,7 +117,8 @@ const PageInputControl: FC<TPageInputControl> = ({
   useEffect(() => {
     setCurrentPage(pagination.page.value);
 
-    if (onChange) onChange({ page: pagination.page.value, count: pagination.total.value });
+    if (onChange)
+      onChange({ page: pagination.page.value, count: pagination.total.value });
   }, [pagination.page.value]);
 
   useEffect(() => {
@@ -128,8 +126,8 @@ const PageInputControl: FC<TPageInputControl> = ({
   }, [currentPage]);
 
   const handleKeyPress = (event: any) => {
-    console.log('Enter');
-    if (event.key == 'Enter') {
+    console.log("Enter");
+    if (event.key == "Enter") {
       const nv = Number(event.currentTarget.value);
       if (nv <= pagesCount) {
         setCurrentPage(nv);
@@ -148,18 +146,19 @@ const PageInputControl: FC<TPageInputControl> = ({
     }
   };
 
-  const extraButtonProps = inputAs == 'input'
-    ? {
-      type: 'number',
-      defaultValue: { currentPage },
-      ref: inputRef as any,
-      max: pagesCount - 1,
-      min: 0,
-    }
-    : {};
+  const extraButtonProps =
+    inputAs == "input"
+      ? {
+          type: "number",
+          defaultValue: { currentPage },
+          ref: inputRef as any,
+          max: pagesCount - 1,
+          min: 0,
+        }
+      : {};
 
   const defaultButtonProps = {
-    className: 'mrc-embed-pdf__control-input',
+    className: "mrc-embed-pdf__control-input",
     onKeyPress: handleKeyPress,
     onBlur: handleBlurPress,
     ...extraButtonProps,
@@ -167,22 +166,15 @@ const PageInputControl: FC<TPageInputControl> = ({
 
   return (
     <div>
-      <span>
-        {slots.labelLeft}
-        {' '}
-      </span>
+      <span>{slots.labelLeft} </span>
       {React.createElement(inputAs!, { ...defaultButtonProps })}
-      <span>
-        {' '}
-        {slots.labelRight}
-        {' '}
-      </span>
+      <span> {slots.labelRight} </span>
       <span>{pagesCount}</span>
     </div>
   );
 };
 
 PageInputControl.defaultProps = {
-  inputAs: 'input',
+  inputAs: "input",
 };
 export { PageInputControl, PaginationControl };

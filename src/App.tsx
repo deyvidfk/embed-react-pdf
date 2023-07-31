@@ -1,12 +1,14 @@
-import './App.css';
-import { FC } from 'react';
-import { EmbedPdf } from './lib';
+import "./App.css";
+import { FC } from "react";
+import { EmbedPdf } from "./lib";
 
 function Loading() {
   return <div className="box">Carregando ...</div>;
 }
 
-const MeuErrorHandler: FC = (pros: any) => <div className="box">Houve um erro ao processar o pdf</div>;
+const MeuErrorHandler: FC = (pros: any) => (
+  <div className="box">Houve um erro ao processar o pdf</div>
+);
 
 function MeuBotao({ children, ...rest }: any) {
   return (
@@ -22,15 +24,15 @@ export default function App() {
   };
 
   const handleOnPageChange = ({ page, count }: any) => {
-    console.log('App->handleOnPageChange: ', page, count);
+    console.log("App->handleOnPageChange: ", page, count);
   };
 
   const handleOnRotateChange = ({ degree }: any) => {
-    console.log('App->handleOnRotateChange: ', degree);
+    console.log("App->handleOnRotateChange: ", degree);
   };
 
   const handleOnScaleChange = ({ scale }: any) => {
-    console.log('App->handleOnScaleChange: ', scale);
+    console.log("App->handleOnScaleChange: ", scale);
   };
 
   return (
@@ -42,7 +44,7 @@ export default function App() {
         Loading,
       }}
     >
-      <div style={{ display: 'flex', flex: '1', overflow: 'auto' }}>
+      <div style={{ display: "flex", flex: "1", overflow: "auto" }}>
         <EmbedPdf.Toolbar as="fieldset">
           <EmbedPdf.ToolbarItem>
             <EmbedPdf.Download src="test.pdf">Download</EmbedPdf.Download>
@@ -72,7 +74,7 @@ export default function App() {
           <EmbedPdf.ToolbarItem>
             <EmbedPdf.Pagination onChange={handleOnPageChange} />
             <EmbedPdf.PaginationInput
-              slots={{ labelLeft: 'Página', labelRight: 'de' }}
+              slots={{ labelLeft: "Página", labelRight: "de" }}
               onChange={handleOnPageChange}
             />
           </EmbedPdf.ToolbarItem>

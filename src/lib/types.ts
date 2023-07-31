@@ -1,4 +1,4 @@
-import { MutableRefObject } from 'react';
+import { MutableRefObject } from "react";
 
 export interface TGetter<T> {
   value: T;
@@ -34,7 +34,7 @@ export type TPaginationContext = {
 };
 
 export type OnHandler = {
-  name: 'GENERIC_ERROR' | 'LOAD_ERROR' | 'SOURCE_ERROR' | 'ONLOAD_PROGRESS';
+  name: "GENERIC_ERROR" | "LOAD_ERROR" | "SOURCE_ERROR" | "ONLOAD_PROGRESS";
   meta: unknown;
 };
 

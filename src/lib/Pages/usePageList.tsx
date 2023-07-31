@@ -1,7 +1,7 @@
-import { asyncMap } from '@wojtekmaj/async-array-utils';
-import { useState, useEffect, useCallback } from 'react';
-import { pdfjs } from 'react-pdf';
-import { useControls } from '../Controls/useControls';
+import { asyncMap } from "@wojtekmaj/async-array-utils";
+import { useState, useEffect, useCallback } from "react";
+import { pdfjs } from "react-pdf";
+import { useControls } from "../Controls/useControls";
 
 export const usePageList = (
   documentInstance: false | pdfjs.PDFDocumentProxy | undefined,
@@ -27,10 +27,12 @@ export const usePageList = (
         (_, index) => index + 1,
       );
 
-      const nextPageViewPorts = await asyncMap(pageNumbers, (pageNumber) => documentRef.getPage(pageNumber).then((page: pdfjs.PDFPageProxy) => {
-        const r = page.getViewport({ scale: scale.value });
-        return r;
-      }));
+      const nextPageViewPorts = await asyncMap(pageNumbers, (pageNumber) =>
+        documentRef.getPage(pageNumber).then((page: pdfjs.PDFPageProxy) => {
+          const r = page.getViewport({ scale: scale.value });
+          return r;
+        }),
+      );
 
       setPageViewPort(nextPageViewPorts as any);
     })();
@@ -39,7 +41,7 @@ export const usePageList = (
   const getPageHeight = useCallback(
     (pageIndex: number) => {
       if (!pageViewPort) {
-        throw new Error('getPageHeight() called too early');
+        throw new Error("getPageHeight() called too early");
       }
 
       const pageViewport = pageViewPort[pageIndex] as any;

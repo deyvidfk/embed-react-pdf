@@ -1,22 +1,20 @@
-import {
-  act, render, screen, waitFor, cleanup,
-} from '@testing-library/react';
-import { DocumentRoot } from '..';
+import { act, render, screen, waitFor, cleanup } from "@testing-library/react";
+import { DocumentRoot } from "..";
 
-jest.mock('react-pdf', () => ({
+jest.mock("react-pdf", () => ({
   __esModule: true,
-  ...jest.requireActual('react-pdf'),
+  ...jest.requireActual("react-pdf"),
   Document: ({ children }: any) => <>{children}</>,
 }));
 
-describe('DocumentRoot', () => {
+describe("DocumentRoot", () => {
   beforeAll(() => {
     cleanup();
     jest.restoreAllMocks();
     jest.clearAllMocks();
   });
 
-  test('Deve exibir o componente de carregamento', async () => {
+  test("Deve exibir o componente de carregamento", async () => {
     const {} = render(
       <DocumentRoot
         onPdfAbstractEvents={(ev) => {

@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useRef } from 'react';
-import printJS from 'print-js';
+import React, { FC, useEffect, useRef } from "react";
+import printJS from "print-js";
 
 type TScaleControl = {
   src: string;
@@ -12,14 +12,14 @@ const PrintControl: FC<TScaleControl> = ({
   children,
   ...restProps
 }) => {
-  const extraButtonProps = asProp == 'button' ? { type: 'button' } : {};
+  const extraButtonProps = asProp == "button" ? { type: "button" } : {};
 
   const defaultButtonProps = {
     ...restProps,
     ...extraButtonProps,
     onClick: () => {
       // printJS( { printable:  document.querySelector("#PageList__id")?.firstChild, type: 'html'})
-      printJS({ printable: src, type: 'pdf' });
+      printJS({ printable: src, type: "pdf" });
     },
   };
 
@@ -27,7 +27,7 @@ const PrintControl: FC<TScaleControl> = ({
 };
 
 PrintControl.defaultProps = {
-  as: 'button',
+  as: "button",
 };
 
 export { PrintControl };

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC } from "react";
 
 type TDownloadControl = {
   src: string;
@@ -11,7 +11,8 @@ const DownloadControl: FC<TDownloadControl> = ({
   as: asProp,
   ...restProps
 }) => {
-  const extraButtonProps = asProp == 'a' ? { href: src, targe: '_blank', download: true } : {};
+  const extraButtonProps =
+    asProp === "a" ? { href: src, targe: "_blank", download: true } : {};
 
   const defaultButtonProps = {
     ...restProps,
@@ -22,7 +23,7 @@ const DownloadControl: FC<TDownloadControl> = ({
 };
 
 DownloadControl.defaultProps = {
-  as: 'a',
+  as: "a",
 };
 
 export { DownloadControl };

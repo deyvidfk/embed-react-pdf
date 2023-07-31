@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import screenfull from 'screenfull';
+import React, { FC } from "react";
+import screenfull from "screenfull";
 
 export type TFullScreenControl = {
   containerId?: string;
@@ -12,7 +12,7 @@ const FullScreenControl: FC<TFullScreenControl> = ({
   as: asProp,
   ...restProps
 }) => {
-  const extraButtonProps = asProp == 'button' ? { type: 'button' } : {};
+  const extraButtonProps = asProp === "button" ? { type: "button" } : {};
 
   const defaultButtonProps = {
     ...restProps,
@@ -32,7 +32,7 @@ const FullScreenControl: FC<TFullScreenControl> = ({
 };
 
 FullScreenControl.defaultProps = {
-  as: 'button',
+  as: "button",
 };
 
 export { FullScreenControl };

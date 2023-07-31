@@ -1,4 +1,4 @@
-import { ReactNode, LabelHTMLAttributes } from 'react';
+import { ReactNode, LabelHTMLAttributes } from "react";
 
 export type TRenderer = () => ReactNode;
 export type TLabelProps = {

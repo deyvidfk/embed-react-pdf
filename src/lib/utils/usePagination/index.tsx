@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-type THookValue = {
+export type THookValue = {
   pagesCount: number;
   page?: number;
   onChangeValue?: (value: number) => void;
