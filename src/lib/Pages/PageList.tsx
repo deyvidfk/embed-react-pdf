@@ -5,7 +5,7 @@ import { useWindowHeight, useWindowWidth } from "@wojtekmaj/react-hooks";
 import { usePageList } from "./usePageList";
 import { useControls } from "../Controls/useControls";
 import { PageListItem } from "./PageListItem";
-import { useCustomDebounce } from "../useCustomDebounce";
+import { useCustomDebounce } from "../utils/useCustomDebounce";
 import { usePageFit } from "../Controls/Scale";
 
 type TPageList = {
@@ -65,17 +65,19 @@ export function PageList({ id, pageFit }: TPageList) {
     return <>Carregando..</>;
   }
 
+  const deferredFnCall=debounce(() => {
+    pagination.page.set(internalPage.current);   
+  }, 200);
+
   return (
     <VariableSizeList
       className="mrc-embed-pdf__page-list"
       outerRef={outerRef}
       onItemsRendered={(ev) => {
-        const forwardValue = ev.visibleStopIndex + 1;
-        debounce(() => {
-          pagination.page.set(forwardValue);
-          internalPage.current = forwardValue;
-        }, 200);
-
+        internalPage.current = ev.visibleStopIndex + 1;;
+        
+        deferredFnCall()
+        
         if (outerRef.current) {
           (outerRef.current as HTMLElement).setAttribute("id", id);
         }

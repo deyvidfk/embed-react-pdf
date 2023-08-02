@@ -47,10 +47,10 @@ export default function App() {
       <div style={{ display: "flex", flex: "1", overflow: "auto" }}>
         <EmbedPdf.Toolbar as="fieldset">
           <EmbedPdf.ToolbarItem>
-            <EmbedPdf.Download src="test.pdf">Download</EmbedPdf.Download>
+            <EmbedPdf.Download src="test.pdf" >Download</EmbedPdf.Download>
           </EmbedPdf.ToolbarItem>
           <EmbedPdf.ToolbarItem>
-            <EmbedPdf.FullScreen containerId="#PageList__id">
+            <EmbedPdf.FullScreen containerId="#PageList__id" >
               FullScreen
             </EmbedPdf.FullScreen>
           </EmbedPdf.ToolbarItem>
@@ -58,6 +58,9 @@ export default function App() {
           <EmbedPdf.ToolbarItem>
             <EmbedPdf.Print src="test.pdf">Imprimir</EmbedPdf.Print>
           </EmbedPdf.ToolbarItem>
+          
+
+          
           <EmbedPdf.ToolbarItem>
             <EmbedPdf.AutoScale>Ajustar à largura</EmbedPdf.AutoScale>
           </EmbedPdf.ToolbarItem>
@@ -67,7 +70,6 @@ export default function App() {
               label="Zoom: "
             />
           </EmbedPdf.ToolbarItem>
-
           <EmbedPdf.ToolbarItem>
             <EmbedPdf.Rotate onChange={handleOnRotateChange} label="Girar: " />
           </EmbedPdf.ToolbarItem>

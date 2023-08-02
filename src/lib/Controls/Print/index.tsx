@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC } from "react";
 import printJS from "print-js";
 
 type TScaleControl = {
@@ -18,7 +18,6 @@ const PrintControl: FC<TScaleControl> = ({
     ...restProps,
     ...extraButtonProps,
     onClick: () => {
-      // printJS( { printable:  document.querySelector("#PageList__id")?.firstChild, type: 'html'})
       printJS({ printable: src, type: "pdf" });
     },
   };
