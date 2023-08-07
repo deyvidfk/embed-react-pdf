@@ -5,7 +5,7 @@ import { RotateControl } from "./Controls/Rotation";
 import { AutoScale, ManualScale } from "./Controls/Scale";
 import { DownloadControl } from "./Controls/Download";
 import { PrintControl } from "./Controls/Print";
-import { FullScreenControl } from "./Controls/Fullscrenn";
+import { FullScreenControl } from "./Controls/Fullscreen";
 import { Toolbar, ToolbarItem } from "./Controls/Toolbar";
 
 export const EmbedPdf = {

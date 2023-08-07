@@ -44,7 +44,6 @@ export default function App() {
         Loading,
       }}
     >
-      <div style={{ display: "flex", flex: "1", overflow: "auto" }}>
         <EmbedPdf.Toolbar as="fieldset">
           <EmbedPdf.ToolbarItem>
             <EmbedPdf.Download src="test.pdf" >Download</EmbedPdf.Download>
@@ -81,7 +80,7 @@ export default function App() {
             />
           </EmbedPdf.ToolbarItem>
         </EmbedPdf.Toolbar>
-      </div>
+  
       <EmbedPdf.PageList id="PageList__id" pageFit />
     </EmbedPdf.Document>
   );

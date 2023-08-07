@@ -4,6 +4,7 @@ import { pdfjs } from "react-pdf";
 import { useControls } from "../../Controls/useControls";
 
 export const calcScaleFn = (pageWidth: number, windowWidth: number) => {
+  
   const width = Math.round(windowWidth ?? 0) / Math.round(pageWidth);
   return width;
 };

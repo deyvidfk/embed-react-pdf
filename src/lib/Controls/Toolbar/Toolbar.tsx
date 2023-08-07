@@ -9,12 +9,13 @@ export function Toolbar({
 }: React.PropsWithChildren<TToolbar>) {
   const Component = asProp;
   return (
-    <Component
-      role="toolbar"
-      aria-label="Barra de PDF"
-      className="mrc-embed-pdf__toolbar"
-    >
-      {children}
-    </Component>
+    <div style={{ display: "flex", flex: "1", overflow: "auto", justifyContent: "center" }}>
+      <Component
+        role="toolbar"
+        aria-label="Barra de PDF"
+        className="mrc-embed-pdf__toolbar"
+      >
+        {children}
+      </Component></div>
   );
 }
